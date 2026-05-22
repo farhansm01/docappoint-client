@@ -1,12 +1,18 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { FaClock, FaMapMarkerAlt, FaStar } from "react-icons/fa";
 
 export default function DoctorCard({ doctor }) {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
 
   const handleViewDetails = () => {
-    router.push(`/appointments/${doctor._id}`);
+    if (session?.user) {
+      router.push(`/appointments/${doctor._id}`);
+    } else {
+      router.push("/login");
+    }
   };
 
   return (

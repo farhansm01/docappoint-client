@@ -1,4 +1,4 @@
-import { FaArrowRight } from "react-icons/fa";
+import BookingButton from "@/components/BookingButton";
 
 import {
   FaClock,
@@ -103,11 +103,7 @@ export default async function DoctorDetailsPage({ params }) {
               </div>
 
               {/* Book Button */}
-              <button className="w-full bg-blue-600 text-white font-bold text-sm py-3.5 rounded-xl hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-200 transition-all duration-200">
-                <span className="flex items-center justify-center gap-2">
-                  Book Appointment <FaArrowRight className="text-xs" />
-                </span>
-              </button>
+              <BookingButton doctor={doctor} />
             </div>
           </div>
         </div>
