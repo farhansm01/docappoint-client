@@ -1,17 +1,28 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { data: session } = authClient.useSession();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    toast.success("Logged out successfully!");
+    router.push("/");
+  };
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -57,20 +68,42 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Auth Buttons */}
+        {/* Auth — Desktop */}
         <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/login"
-            className="text-blue-600 font-bold text-sm px-5 py-2 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all duration-200"
-          >
-            Login
-          </Link>
-          <Link
-            href="/register"
-            className="bg-blue-600 text-white font-bold text-sm px-5 py-2 rounded-lg hover:bg-blue-700 shadow-md shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Register
-          </Link>
+          {session?.user ? (
+            <div className="flex items-center gap-3">
+              <img
+                src={
+                  session.user.image?.replace("s96-c", "s200-c") ||
+                  "/default-avatar.png"
+                }
+                alt={session.user.name}
+                referrerPolicy="no-referrer"
+                className="w-10 h-10 rounded-full object-cover border-2 border-blue-200"
+              />
+              <button
+                onClick={handleLogout}
+                className="text-white bg-blue-600 font-bold text-sm px-5 py-2 rounded-lg hover:bg-blue-700 transition-all duration-200"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-blue-600 font-bold text-sm px-5 py-2 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all duration-200"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="bg-blue-600 text-white font-bold text-sm px-5 py-2 rounded-lg hover:bg-blue-700 shadow-md shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-0.5 transition-all duration-200"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Hamburger */}
@@ -104,19 +137,47 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <div className="flex gap-3 mt-4">
-            <Link
-              href="/login"
-              className="flex-1 text-center text-blue-600 font-bold text-sm py-2.5 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all"
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="flex-1 text-center bg-blue-600 text-white font-bold text-sm py-2.5 rounded-lg hover:bg-blue-700 transition-all"
-            >
-              Register
-            </Link>
+
+          <div className="mt-4">
+            {session?.user ? (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={
+                      session.user.image?.replace("s96-c", "s200-c") ||
+                      "/default-avatar.png"
+                    }
+                    alt={session.user.name}
+                    referrerPolicy="no-referrer"
+                    className="w-10 h-10 rounded-full object-cover border-2 border-blue-200"
+                  />
+                  <span className="text-gray-700 font-semibold text-sm">
+                    {session.user.name}
+                  </span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="bg-blue-600 text-white font-bold text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <Link
+                  href="/login"
+                  className="flex-1 text-center text-blue-600 font-bold text-sm py-2.5 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="flex-1 text-center bg-blue-600 text-white font-bold text-sm py-2.5 rounded-lg hover:bg-blue-700 transition-all"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
