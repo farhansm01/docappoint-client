@@ -16,6 +16,15 @@ async function getDoctor(id) {
   return res.json();
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const doctor = await getDoctor(id);
+  return {
+    title: doctor.name,
+    description: `Book an appointment with ${doctor.name}, ${doctor.specialty} at ${doctor.hospital}, ${doctor.location}.`,
+  };
+}
+
 export default async function DoctorDetailsPage({ params }) {
   const { id } = await params;
   const doctor = await getDoctor(id);
