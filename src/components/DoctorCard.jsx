@@ -15,7 +15,7 @@ export default function DoctorCard({ doctor }) {
         <img
           src={doctor.image}
           alt={doctor.name}
-          className="w-full h-52 object-cover"
+          className="w-full h-52 object-cover object-[center_20%]"
         />
         <span className="absolute top-3 right-3 bg-white text-yellow-500 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow">
           <FaStar className="text-yellow-400" />
