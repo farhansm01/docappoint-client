@@ -9,7 +9,7 @@ export default function AppointmentsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/doctors")
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctors`)
       .then((res) => res.json())
       .then((data) => {
         setDoctors(data);

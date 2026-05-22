@@ -13,7 +13,7 @@ export default function MyBookings({ userEmail }) {
 
   const fetchBookings = async () => {
     const res = await fetch(
-      `http://localhost:5000/appointments?email=${userEmail}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments?email=${userEmail}`,
     );
     const data = await res.json();
     setBookings(Array.isArray(data) ? data : []);
@@ -25,9 +25,12 @@ export default function MyBookings({ userEmail }) {
   }, [userEmail]);
 
   const handleDelete = async () => {
-    const res = await fetch(`http://localhost:5000/appointments/${deleteId}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments/${deleteId}`,
+      {
+        method: "DELETE",
+      },
+    );
     if (res.ok) {
       setBookings((prev) => prev.filter((b) => b._id !== deleteId));
       toast.success("Appointment deleted successfully!");

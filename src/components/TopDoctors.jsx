@@ -1,7 +1,7 @@
 import DoctorCard from "./DoctorCard";
 
 async function getTopDoctors() {
-  const res = await fetch("http://localhost:5000/doctors/top", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctors/top`, {
     cache: "no-store",
   });
   return res.json();
