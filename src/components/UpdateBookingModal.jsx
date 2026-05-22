@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -23,11 +24,18 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
 
   const handleUpdate = async (data) => {
     setLoading(true);
+
+    // get JWT token
+    const token = await authClient.getToken();
+
     const res = await fetch(
       `http://localhost:5000/appointments/${booking._id}`,
       {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // attach token
+        },
         body: JSON.stringify(data),
       },
     );
