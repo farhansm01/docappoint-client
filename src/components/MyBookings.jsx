@@ -1,5 +1,4 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -13,15 +12,11 @@ export default function MyBookings({ userEmail }) {
   const [deleteId, setDeleteId] = useState(null);
 
   const fetchBookings = async () => {
-    const token = await authClient.getToken();
     const res = await fetch(
       `http://localhost:5000/appointments?email=${userEmail}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
     );
     const data = await res.json();
-    setBookings(data);
+    setBookings(Array.isArray(data) ? data : []);
     setLoading(false);
   };
 
@@ -30,10 +25,8 @@ export default function MyBookings({ userEmail }) {
   }, [userEmail]);
 
   const handleDelete = async () => {
-    const token = await authClient.getToken();
     const res = await fetch(`http://localhost:5000/appointments/${deleteId}`, {
       method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
     });
     if (res.ok) {
       setBookings((prev) => prev.filter((b) => b._id !== deleteId));

@@ -1,5 +1,4 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -24,18 +23,11 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
 
   const handleUpdate = async (data) => {
     setLoading(true);
-
-    // get JWT token
-    const token = await authClient.getToken();
-
     const res = await fetch(
       `http://localhost:5000/appointments/${booking._id}`,
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // attach token
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       },
     );
@@ -70,7 +62,6 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
           onSubmit={handleSubmit(handleUpdate)}
           className="flex flex-col gap-4"
         >
-          {/* Readonly fields */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1 block">
@@ -96,7 +87,6 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
             </div>
           </div>
 
-          {/* Patient Name */}
           <div>
             <label className="text-xs font-semibold text-gray-500 mb-1 block">
               Patient Name <span className="text-red-400">*</span>
@@ -113,7 +103,6 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
             )}
           </div>
 
-          {/* Gender + Phone */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1 block">
@@ -140,7 +129,6 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
             </div>
           </div>
 
-          {/* Date + Time */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1 block">
