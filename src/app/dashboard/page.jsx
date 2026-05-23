@@ -3,18 +3,12 @@ import MyBookings from "@/components/MyBookings";
 import MyProfile from "@/components/MyProfile";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function DashboardPage() {
   const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("bookings");
-
-  useEffect(() => {
-    if (!isPending && !session?.user) {
-      router.push("/login");
-    }
-  }, [session, isPending, router]);
 
   if (isPending) {
     return (
