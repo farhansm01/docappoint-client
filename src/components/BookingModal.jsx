@@ -31,9 +31,7 @@ export default function BookingModal({ doctor, onClose }) {
       `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(appointment),
       },
     );
@@ -48,80 +46,81 @@ export default function BookingModal({ doctor, onClose }) {
     }
   };
 
+  const inputClass =
+    "w-full border-2 border-slate-200 focus:border-blue-300 focus:bg-blue-50/30 rounded-xl px-3 py-2 text-sm text-slate-700 placeholder-slate-300 focus:outline-none transition-all duration-200 bg-transparent";
+  const labelClass = "text-xs font-bold text-slate-500 mb-1 block";
+  const errorClass = "text-red-500 text-xs mt-0.5";
+
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative">
+      <div className="bg-white rounded-3xl shadow-xl shadow-blue-100/40 border border-slate-100 w-full max-w-md p-6 relative">
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-slate-300 hover:text-slate-500 transition-colors"
         >
           <FaTimes />
         </button>
 
         {/* Header */}
         <div className="mb-5">
-          <h2 className="text-lg font-bold text-gray-900">Book Appointment</h2>
-          <p className="text-gray-400 text-xs mt-0.5">with {doctor.name}</p>
+          <h2 className="text-lg font-extrabold text-slate-800">
+            Book Appointment
+          </h2>
+          <p className="text-slate-400 text-xs mt-0.5">with {doctor.name}</p>
         </div>
 
         <form
           onSubmit={handleSubmit(handleBooking)}
           className="flex flex-col gap-3"
         >
-          {/* Email + Doctor Name - side by side */}
+          {/* Email + Doctor Name */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
-                User Email
-              </label>
+              <label className={labelClass}>User Email</label>
               <input
                 type="email"
                 value={session?.user?.email || ""}
                 readOnly
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-500 bg-gray-50 focus:outline-none cursor-not-allowed"
+                className="w-full border-2 border-slate-100 rounded-xl px-3 py-2 text-xs text-slate-400 bg-slate-50 focus:outline-none cursor-not-allowed"
               />
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
-                Doctor Name
-              </label>
+              <label className={labelClass}>Doctor Name</label>
               <input
                 type="text"
                 value={doctor.name}
                 readOnly
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-500 bg-gray-50 focus:outline-none cursor-not-allowed"
+                className="w-full border-2 border-slate-100 rounded-xl px-3 py-2 text-xs text-slate-400 bg-slate-50 focus:outline-none cursor-not-allowed"
               />
             </div>
           </div>
 
           {/* Patient Name */}
           <div>
-            <label className="text-xs font-semibold text-gray-500 mb-1 block">
+            <label className={labelClass}>
               Patient Name <span className="text-red-400">*</span>
             </label>
             <input
               {...register("patientName", { required: "Required" })}
               type="text"
               placeholder="Full name"
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+              className={inputClass}
             />
             {errors.patientName && (
-              <p className="text-red-500 text-xs mt-0.5">
-                {errors.patientName.message}
-              </p>
+              <p className={errorClass}>{errors.patientName.message}</p>
             )}
           </div>
 
-          {/* Gender + Phone - side by side */}
+          {/* Gender + Phone */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Gender <span className="text-red-400">*</span>
               </label>
               <select
                 {...register("gender", { required: "Required" })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all bg-white"
+                className={inputClass}
               >
                 <option value="">Select</option>
                 <option value="Male">Male</option>
@@ -129,59 +128,51 @@ export default function BookingModal({ doctor, onClose }) {
                 <option value="Other">Other</option>
               </select>
               {errors.gender && (
-                <p className="text-red-500 text-xs mt-0.5">
-                  {errors.gender.message}
-                </p>
+                <p className={errorClass}>{errors.gender.message}</p>
               )}
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Phone <span className="text-red-400">*</span>
               </label>
               <input
                 {...register("phone", { required: "Required" })}
                 type="tel"
                 placeholder="01XXXXXXXXX"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                className={inputClass}
               />
               {errors.phone && (
-                <p className="text-red-500 text-xs mt-0.5">
-                  {errors.phone.message}
-                </p>
+                <p className={errorClass}>{errors.phone.message}</p>
               )}
             </div>
           </div>
 
-          {/* Date + Time - side by side */}
+          {/* Date + Time */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Date <span className="text-red-400">*</span>
               </label>
               <input
                 {...register("appointmentDate", { required: "Required" })}
                 type="date"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                className={inputClass}
               />
               {errors.appointmentDate && (
-                <p className="text-red-500 text-xs mt-0.5">
-                  {errors.appointmentDate.message}
-                </p>
+                <p className={errorClass}>{errors.appointmentDate.message}</p>
               )}
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Time <span className="text-red-400">*</span>
               </label>
               <input
                 {...register("appointmentTime", { required: "Required" })}
                 type="time"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                className={inputClass}
               />
               {errors.appointmentTime && (
-                <p className="text-red-500 text-xs mt-0.5">
-                  {errors.appointmentTime.message}
-                </p>
+                <p className={errorClass}>{errors.appointmentTime.message}</p>
               )}
             </div>
           </div>
@@ -189,7 +180,7 @@ export default function BookingModal({ doctor, onClose }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:opacity-60 mt-1"
+            className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold text-sm py-3 rounded-2xl shadow-lg shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:translate-y-0 mt-1"
           >
             {loading ? "Booking..." : "Confirm Booking"}
           </button>

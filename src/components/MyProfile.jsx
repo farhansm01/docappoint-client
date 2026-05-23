@@ -41,7 +41,7 @@ export default function MyProfile({ user }) {
 
   return (
     <>
-      <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm max-w-md">
+      <div className="bg-white border border-slate-100 rounded-3xl p-8 shadow-xl shadow-blue-100/40 max-w-md">
         {/* Avatar */}
         <div className="flex items-center gap-5 mb-6">
           <img
@@ -51,10 +51,10 @@ export default function MyProfile({ user }) {
             className="w-20 h-20 rounded-full object-cover border-4 border-blue-100"
           />
           <div>
-            <h2 className="text-xl font-bold text-gray-900">
+            <h2 className="text-xl font-extrabold text-slate-800">
               {currentUser.name}
             </h2>
-            <p className="text-gray-500 text-sm">{currentUser.email}</p>
+            <p className="text-slate-400 text-sm">{currentUser.email}</p>
           </div>
         </div>
 
@@ -65,21 +65,19 @@ export default function MyProfile({ user }) {
           ].map((item) => (
             <div
               key={item.label}
-              className="bg-gray-50 rounded-xl px-4 py-3 border border-gray-100"
+              className="bg-gradient-to-br from-[#f0f7ff] to-[#e8f5f0] rounded-2xl px-4 py-3 border border-slate-100"
             >
-              <p className="text-gray-400 text-xs font-medium mb-0.5">
+              <p className="text-slate-400 text-xs font-medium mb-0.5">
                 {item.label}
               </p>
-              <p className="text-gray-900 text-sm font-semibold">
-                {item.value}
-              </p>
+              <p className="text-slate-800 text-sm font-bold">{item.value}</p>
             </div>
           ))}
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="w-full bg-blue-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-blue-700 transition-all duration-200"
+          className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold text-sm py-3 rounded-2xl shadow-lg shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200"
         >
           Update Profile
         </button>
@@ -88,15 +86,15 @@ export default function MyProfile({ user }) {
       {/* Update Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative">
+          <div className="bg-white rounded-3xl shadow-xl shadow-blue-100/40 border border-slate-100 w-full max-w-md p-6 relative">
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 text-slate-300 hover:text-slate-500 transition-colors"
             >
               <FaTimes />
             </button>
 
-            <h2 className="text-lg font-bold text-gray-900 mb-5">
+            <h2 className="text-lg font-extrabold text-slate-800 mb-5">
               Update Profile
             </h2>
 
@@ -105,13 +103,13 @@ export default function MyProfile({ user }) {
               className="flex flex-col gap-4"
             >
               <div>
-                <label className="text-xs font-semibold text-gray-500 mb-1 block">
+                <label className="text-xs font-bold text-slate-500 mb-1 block">
                   Full Name
                 </label>
                 <input
                   {...register("name", { required: "Name is required" })}
                   type="text"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                  className="w-full border-2 border-slate-200 focus:border-blue-300 focus:bg-blue-50/30 rounded-2xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none transition-all duration-200"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">
@@ -121,13 +119,13 @@ export default function MyProfile({ user }) {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-500 mb-1 block">
+                <label className="text-xs font-bold text-slate-500 mb-1 block">
                   Photo URL
                 </label>
                 <input
                   {...register("image", { required: "Photo URL is required" })}
                   type="url"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                  className="w-full border-2 border-slate-200 focus:border-blue-300 focus:bg-blue-50/30 rounded-2xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none transition-all duration-200"
                 />
                 {errors.image && (
                   <p className="text-red-500 text-xs mt-1">
@@ -139,7 +137,7 @@ export default function MyProfile({ user }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:opacity-60"
+                className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold text-sm py-3 rounded-2xl shadow-lg shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:translate-y-0"
               >
                 {loading ? "Updating..." : "Save Changes"}
               </button>

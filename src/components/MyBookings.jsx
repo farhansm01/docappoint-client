@@ -27,9 +27,7 @@ export default function MyBookings({ userEmail }) {
   const handleDelete = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments/${deleteId}`,
-      {
-        method: "DELETE",
-      },
+      { method: "DELETE" },
     );
     if (res.ok) {
       setBookings((prev) => prev.filter((b) => b._id !== deleteId));
@@ -43,7 +41,7 @@ export default function MyBookings({ userEmail }) {
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <span className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+        <span className="w-10 h-10 border-4 border-blue-500 border-t-teal-400 rounded-full animate-spin" />
       </div>
     );
   }
@@ -51,7 +49,7 @@ export default function MyBookings({ userEmail }) {
   if (bookings.length === 0) {
     return (
       <div className="text-center py-20">
-        <p className="text-gray-400 text-base">No bookings found.</p>
+        <p className="text-slate-400 text-base">No bookings found.</p>
       </div>
     );
   }
@@ -62,27 +60,27 @@ export default function MyBookings({ userEmail }) {
         {bookings.map((booking) => (
           <div
             key={booking._id}
-            className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm"
+            className="bg-white border border-slate-100 rounded-3xl p-5 shadow-md shadow-blue-100/40"
           >
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="text-gray-900 font-bold text-base">
+                <h3 className="text-slate-800 font-extrabold text-base">
                   {booking.doctorName}
                 </h3>
-                <p className="text-blue-600 text-xs font-medium mt-0.5">
+                <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 text-xs font-bold mt-0.5">
                   {booking.patientName}
                 </p>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => setSelectedBooking(booking)}
-                  className="w-8 h-8 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-100 transition-all"
+                  className="w-8 h-8 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-100 transition-all"
                 >
                   <FaEdit className="text-xs" />
                 </button>
                 <button
                   onClick={() => setDeleteId(booking._id)}
-                  className="w-8 h-8 bg-red-50 text-red-500 rounded-lg flex items-center justify-center hover:bg-red-100 transition-all"
+                  className="w-8 h-8 bg-red-50 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-100 transition-all"
                 >
                   <FaTrash className="text-xs" />
                 </button>
@@ -101,10 +99,10 @@ export default function MyBookings({ userEmail }) {
                   key={item.label}
                   className="flex items-center gap-2 text-sm"
                 >
-                  <span className="text-gray-400 w-16 shrink-0">
+                  <span className="text-slate-400 w-16 shrink-0">
                     {item.label}
                   </span>
-                  <span className="text-gray-700 font-medium">
+                  <span className="text-slate-700 font-medium">
                     {item.value}
                   </span>
                 </div>

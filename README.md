@@ -1,6 +1,6 @@
 # DocAppoint — Doctor Appointment Manager
 
-🌐 **Live Site:** [https://your-live-url.vercel.app](https://your-live-url.vercel.app)
+🌐 **Live Site:** [https://docappoint-client-indol.vercel.app/](https://docappoint-client-indol.vercel.app/)
 
 ## Features
 
@@ -15,6 +15,7 @@
 ## Tech Stack
 
 **Client**
+
 - [Next.js 15](https://nextjs.org/) (App Router)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Better Auth](https://www.better-auth.com/) (client)
@@ -23,6 +24,7 @@
 - [React Icons](https://react-icons.github.io/react-icons/)
 
 **Server**
+
 - [Node.js](https://nodejs.org/) + [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/) + [Mongoose](https://mongoosejs.com/)
 - [Better Auth](https://www.better-auth.com/) (server)
@@ -30,20 +32,21 @@
 
 ## Pages
 
-| Page | Route | Auth Required |
-|------|-------|---------------|
-| Home | `/` | No |
-| All Appointments | `/appointments` | No |
-| Doctor Details | `/appointments/[id]` | Yes |
-| Dashboard — My Bookings | `/dashboard` | Yes |
-| Dashboard — My Profile | `/dashboard` | Yes |
-| Login | `/login` | No |
-| Register | `/register` | No |
-| 404 | `*` | No |
+| Page                    | Route                | Auth Required |
+| ----------------------- | -------------------- | ------------- |
+| Home                    | `/`                  | No            |
+| All Appointments        | `/appointments`      | No            |
+| Doctor Details          | `/appointments/[id]` | Yes           |
+| Dashboard — My Bookings | `/dashboard`         | Yes           |
+| Dashboard — My Profile  | `/dashboard`         | Yes           |
+| Login                   | `/login`             | No            |
+| Register                | `/register`          | No            |
+| 404                     | `*`                  | No            |
 
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - MongoDB Atlas account
 - Google OAuth credentials
@@ -108,6 +111,6 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ## Links
 
-- 🔗 Client Repo: [GitHub](https://github.com/your-username/docappoint-client)
-- 🔗 Server Repo: [GitHub](https://github.com/your-username/docappoint-server)
-- 🌐 Live Site: [DocAppoint](https://your-live-url.vercel.app)
+- 🔗 Client Repo: [GitHub](https://github.com/farhansm01/docappoint-client)
+- 🔗 Server Repo: [GitHub](https://github.com/farhansm01/docappoint-server)
+- 🌐 Live Site: [DocAppoint](https://docappoint-client-indol.vercel.app)

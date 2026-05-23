@@ -53,12 +53,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-full max-w-md p-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#f0f7ff] via-white to-[#e8f5f0] flex items-center justify-center px-4 py-10">
+      <div className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-blue-100/40 w-full max-w-md p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Register</h1>
-          <p className="text-gray-500 text-sm">
+          <h1 className="text-2xl font-extrabold text-slate-800 mb-1">
+            Register
+          </h1>
+          <p className="text-slate-400 text-sm">
             Create your DocAppoint account
           </p>
         </div>
@@ -66,7 +68,7 @@ export default function RegisterPage() {
         {/* Google Button */}
         <button
           onClick={handleGoogle}
-          className="w-full flex items-center justify-center gap-3 border border-gray-200 text-gray-700 font-semibold text-sm py-3 rounded-xl hover:bg-gray-50 transition-all duration-200 mb-6"
+          className="w-full flex items-center justify-center gap-3 border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50/50 text-slate-700 font-semibold text-sm py-3 rounded-2xl transition-all duration-200 mb-6"
         >
           <FcGoogle className="text-xl" />
           Continue with Google
@@ -74,9 +76,11 @@ export default function RegisterPage() {
 
         {/* Divider */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex-1 h-px bg-gray-200" />
-          <span className="text-gray-400 text-xs">or continue with email</span>
-          <div className="flex-1 h-px bg-gray-200" />
+          <div className="flex-1 h-px bg-slate-100" />
+          <span className="text-slate-300 text-xs font-medium">
+            or continue with email
+          </span>
+          <div className="flex-1 h-px bg-slate-100" />
         </div>
 
         {/* Form */}
@@ -85,17 +89,19 @@ export default function RegisterPage() {
           className="flex flex-col gap-4"
         >
           {/* Name */}
-          <fieldset className="border border-gray-200 rounded-xl px-4 pt-2 pb-3">
-            <legend className="text-xs font-semibold text-gray-400 px-1">
+          <fieldset
+            className={`border-2 rounded-2xl px-4 pt-2 pb-3 transition-all duration-200 ${errors.name ? "border-red-200 bg-red-50/30" : "border-slate-200 focus-within:border-blue-300 focus-within:bg-blue-50/30"}`}
+          >
+            <legend className="text-xs font-bold text-slate-500 px-1">
               Full Name
             </legend>
             <div className="relative">
-              <FaUser className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+              <FaUser className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300 text-sm" />
               <input
                 {...register("name", { required: "Name is required" })}
                 type="text"
                 placeholder="Enter your full name"
-                className="w-full pl-6 py-1 text-sm text-gray-700 focus:outline-none"
+                className="w-full pl-6 py-1 text-sm text-slate-700 placeholder-slate-300 focus:outline-none bg-transparent"
               />
             </div>
             {errors.name && (
@@ -104,17 +110,19 @@ export default function RegisterPage() {
           </fieldset>
 
           {/* Email */}
-          <fieldset className="border border-gray-200 rounded-xl px-4 pt-2 pb-3">
-            <legend className="text-xs font-semibold text-gray-400 px-1">
+          <fieldset
+            className={`border-2 rounded-2xl px-4 pt-2 pb-3 transition-all duration-200 ${errors.email ? "border-red-200 bg-red-50/30" : "border-slate-200 focus-within:border-blue-300 focus-within:bg-blue-50/30"}`}
+          >
+            <legend className="text-xs font-bold text-slate-500 px-1">
               Email
             </legend>
             <div className="relative">
-              <FaEnvelope className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+              <FaEnvelope className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300 text-sm" />
               <input
                 {...register("email", { required: "Email is required" })}
                 type="email"
                 placeholder="Enter your email"
-                className="w-full pl-6 py-1 text-sm text-gray-700 focus:outline-none"
+                className="w-full pl-6 py-1 text-sm text-slate-700 placeholder-slate-300 focus:outline-none bg-transparent"
               />
             </div>
             {errors.email && (
@@ -125,17 +133,19 @@ export default function RegisterPage() {
           </fieldset>
 
           {/* Photo URL */}
-          <fieldset className="border border-gray-200 rounded-xl px-4 pt-2 pb-3">
-            <legend className="text-xs font-semibold text-gray-400 px-1">
+          <fieldset
+            className={`border-2 rounded-2xl px-4 pt-2 pb-3 transition-all duration-200 ${errors.photoURL ? "border-red-200 bg-red-50/30" : "border-slate-200 focus-within:border-blue-300 focus-within:bg-blue-50/30"}`}
+          >
+            <legend className="text-xs font-bold text-slate-500 px-1">
               Photo URL
             </legend>
             <div className="relative">
-              <FaImage className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+              <FaImage className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300 text-sm" />
               <input
                 {...register("photoURL", { required: "Photo URL is required" })}
                 type="url"
                 placeholder="Enter your photo URL"
-                className="w-full pl-6 py-1 text-sm text-gray-700 focus:outline-none"
+                className="w-full pl-6 py-1 text-sm text-slate-700 placeholder-slate-300 focus:outline-none bg-transparent"
               />
             </div>
             {errors.photoURL && (
@@ -146,12 +156,14 @@ export default function RegisterPage() {
           </fieldset>
 
           {/* Password */}
-          <fieldset className="border border-gray-200 rounded-xl px-4 pt-2 pb-3">
-            <legend className="text-xs font-semibold text-gray-400 px-1">
+          <fieldset
+            className={`border-2 rounded-2xl px-4 pt-2 pb-3 transition-all duration-200 ${errors.password ? "border-red-200 bg-red-50/30" : "border-slate-200 focus-within:border-blue-300 focus-within:bg-blue-50/30"}`}
+          >
+            <legend className="text-xs font-bold text-slate-500 px-1">
               Password
             </legend>
             <div className="relative">
-              <FaLock className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+              <FaLock className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300 text-sm" />
               <input
                 {...register("password", {
                   required: "Password is required",
@@ -170,11 +182,11 @@ export default function RegisterPage() {
                 })}
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
-                className="w-full pl-6 pr-8 py-1 text-sm text-gray-700 focus:outline-none"
+                className="w-full pl-6 pr-8 py-1 text-sm text-slate-700 placeholder-slate-300 focus:outline-none bg-transparent"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-gray-600"
+                className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-300 cursor-pointer hover:text-slate-500 transition-colors"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
@@ -189,18 +201,18 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-bold text-sm py-3.5 rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:opacity-60"
+            className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold text-sm py-3.5 rounded-2xl shadow-lg shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:translate-y-0 mt-1"
           >
             {loading ? "Creating account..." : "Register"}
           </button>
         </form>
 
         {/* Footer */}
-        <p className="text-center text-gray-500 text-sm mt-6">
+        <p className="text-center text-slate-400 text-sm mt-6">
           Already have an account?{" "}
           <Link
             href="/login"
-            className="text-blue-600 font-semibold hover:underline"
+            className="text-blue-600 font-bold hover:text-blue-700 transition-colors"
           >
             Login
           </Link>
