@@ -41,21 +41,25 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
     }
   };
 
+  const inputClass =
+    "w-full border-2 border-slate-200 focus:border-blue-300 focus:bg-blue-50/30 rounded-xl px-3 py-2.5 text-sm text-slate-700 placeholder-slate-300 focus:outline-none transition-all duration-200 bg-transparent";
+  const labelClass = "text-xs font-bold text-slate-500 mb-1 block";
+
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative">
+      <div className="bg-white rounded-3xl shadow-xl shadow-blue-100/40 border border-slate-100 w-full max-w-md p-6 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute top-4 right-4 text-slate-300 hover:text-slate-500 transition-colors"
         >
           <FaTimes />
         </button>
 
         <div className="mb-5">
-          <h2 className="text-lg font-bold text-gray-900">
+          <h2 className="text-lg font-extrabold text-slate-800">
             Update Appointment
           </h2>
-          <p className="text-gray-400 text-xs mt-0.5">{booking.doctorName}</p>
+          <p className="text-slate-400 text-xs mt-0.5">{booking.doctorName}</p>
         </div>
 
         <form
@@ -64,37 +68,33 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
         >
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
-                Email
-              </label>
+              <label className={labelClass}>Email</label>
               <input
                 type="email"
                 value={booking.userEmail}
                 readOnly
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-500 bg-gray-50 cursor-not-allowed focus:outline-none"
+                className="w-full border-2 border-slate-100 rounded-xl px-3 py-2 text-xs text-slate-400 bg-slate-50 cursor-not-allowed focus:outline-none"
               />
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
-                Doctor
-              </label>
+              <label className={labelClass}>Doctor</label>
               <input
                 type="text"
                 value={booking.doctorName}
                 readOnly
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-500 bg-gray-50 cursor-not-allowed focus:outline-none"
+                className="w-full border-2 border-slate-100 rounded-xl px-3 py-2 text-xs text-slate-400 bg-slate-50 cursor-not-allowed focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-500 mb-1 block">
+            <label className={labelClass}>
               Patient Name <span className="text-red-400">*</span>
             </label>
             <input
               {...register("patientName", { required: "Required" })}
               type="text"
-              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+              className={inputClass}
             />
             {errors.patientName && (
               <p className="text-red-500 text-xs mt-0.5">
@@ -105,12 +105,12 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Gender <span className="text-red-400">*</span>
               </label>
               <select
                 {...register("gender", { required: "Required" })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white transition-all"
+                className={inputClass}
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -118,36 +118,36 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Phone <span className="text-red-400">*</span>
               </label>
               <input
                 {...register("phone", { required: "Required" })}
                 type="tel"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                className={inputClass}
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Date <span className="text-red-400">*</span>
               </label>
               <input
                 {...register("appointmentDate", { required: "Required" })}
                 type="date"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+              <label className={labelClass}>
                 Time <span className="text-red-400">*</span>
               </label>
               <input
                 {...register("appointmentTime", { required: "Required" })}
                 type="time"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                className={inputClass}
               />
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function UpdateBookingModal({ booking, onClose, onUpdate }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:opacity-60"
+            className="w-full bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-bold text-sm py-3 rounded-2xl shadow-lg shadow-blue-200 hover:-translate-y-0.5 hover:brightness-110 transition-all duration-200 disabled:opacity-60 disabled:translate-y-0"
           >
             {loading ? "Updating..." : "Save Changes"}
           </button>

@@ -30,19 +30,6 @@
 - [Better Auth](https://www.better-auth.com/) (server)
 - [Google OAuth 2.0](https://developers.google.com/identity)
 
-## Pages
-
-| Page                    | Route                | Auth Required |
-| ----------------------- | -------------------- | ------------- |
-| Home                    | `/`                  | No            |
-| All Appointments        | `/appointments`      | No            |
-| Doctor Details          | `/appointments/[id]` | Yes           |
-| Dashboard — My Bookings | `/dashboard`         | Yes           |
-| Dashboard — My Profile  | `/dashboard`         | Yes           |
-| Login                   | `/login`             | No            |
-| Register                | `/register`          | No            |
-| 404                     | `*`                  | No            |
-
 ## Getting Started
 
 ### Prerequisites
@@ -101,8 +88,6 @@ npm start
 cd docappoint-client
 npm run dev
 ```
-
-Visit [http://localhost:3000](http://localhost:3000)
 
 ## Deployment
 

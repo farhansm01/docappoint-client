@@ -54,7 +54,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f0f7ff] via-white to-[#e8f5f0] flex items-center justify-center px-4 py-10">
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-blue-100/40 w-full max-w-md p-8">
+      <div className="bg-white rounded-3xl border border-blue-100 shadow-xl shadow-blue-200/60 w-full max-w-md p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-extrabold text-slate-800 mb-1">

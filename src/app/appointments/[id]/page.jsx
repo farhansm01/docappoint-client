@@ -1,4 +1,6 @@
 import BookingButton from "@/components/BookingButton";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import {
   FaClock,
   FaDollarSign,
@@ -7,10 +9,15 @@ import {
   FaStar,
 } from "react-icons/fa";
 
-async function getDoctor(id) {
+async function getDoctor(id, token) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/doctors/${id}`,
-    { cache: "no-store" },
+    {
+      cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
   if (!res.ok) throw new Error("Failed to fetch doctor");
   return res.json();
@@ -27,7 +34,12 @@ export async function generateMetadata({ params }) {
 
 export default async function DoctorDetailsPage({ params }) {
   const { id } = await params;
-  const doctor = await getDoctor(id);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const doctor = await getDoctor(id, token);
+
+  // console.log(token);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f0f7ff] via-white to-[#e8f5f0]">
