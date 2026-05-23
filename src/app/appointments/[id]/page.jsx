@@ -9,9 +9,12 @@ import {
 } from "react-icons/fa";
 
 async function getDoctor(id) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/doctors/${id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/doctors/${id}`,
+    {
+      cache: "no-store",
+    },
+  );
   if (!res.ok) throw new Error("Failed to fetch doctor");
   return res.json();
 }
